@@ -31,11 +31,11 @@ return [
 
     MySqlConnection::class => function () use ($env) {
         $cfg = [
-            'host' => (string) $env('DB_HOST', '34.9.43.102'),
+            'host' => (string) $env('DB_HOST', '127.0.0.1'),
             'port' => (int) $env('DB_PORT', 3306),
             'database' => (string) $env('DB_DATABASE', 'ml_mail'),
-            'username' => (string) $env('DB_USER', 'mailmonkeys'),
-            'password' => (string) $env('DB_PASS', 't3mp0r4lAllyson#22'),
+            'username' => (string) $env('DB_USER', 'root'),
+            'password' => (string) $env('DB_PASS', ''),
             'charset' => (string) $env('DB_CHARSET', 'utf8mb4'),
             'options' => [
                 \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
@@ -82,7 +82,7 @@ return [
     
         $options = ['read_write_timeout' => 0];
         if ($tls) {
-            $options['ssl'] = ['verify_peer' => false, 'verify_peer_name' => false];
+            $options['ssl'] = ['verify_peer' => true, 'verify_peer_name' => true];
         }
 
         $client = new PredisClient($params, $options);

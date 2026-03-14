@@ -21,8 +21,10 @@
 # To disable all checks (everything public), just use ["*"].
 
 auth {
-    token       = "changeme-super-secret"
-    jwt_secret  = "changeme-even-more-secret"
+    # IMPORTANT: Override these via AUTH_TOKEN and JWT_SECRET environment variables in production.
+    # These placeholder defaults will cause a startup error if not overridden.
+    token       = "${AUTH_TOKEN}"
+    jwt_secret  = "${JWT_SECRET}"
     jwt_ttl     = 172800        # 48h
     jwt_leeway  = 120           # 2 min skew tolerance
     nbf_skew    = 5             # start token 5s in the past
@@ -30,6 +32,9 @@ auth {
     # → declare all of our “public” routes here:
     # match-all for dev or fully open API
     public_paths = [
-        "*"
+        "/",
+        "/auth/*",
+        "/health",
+        "/t/*"
     ]
 }

@@ -727,6 +727,12 @@ final class ApiSendController
         $uEnc = (string)($request->getQueryParams()['u'] ?? '');
         $url  = $this->b64urlDecode($uEnc) ?: 'https://monkeysmail.com';
 
+        // Validate URL scheme to prevent open redirect attacks (e.g. javascript:, data:, etc.)
+        $scheme = parse_url($url, PHP_URL_SCHEME);
+        if (!is_string($scheme) || !in_array(strtolower($scheme), ['http', 'https'], true)) {
+            $url = 'https://monkeysmail.com';
+        }
+
         error_log("Track click attempt for RID: {$rid}, URL: {$url}");
 
         $this->trackEventSafe($rid, 'clicked', $request, ['url' => $url]);
