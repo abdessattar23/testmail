@@ -729,7 +729,7 @@ final class ApiSendController
 
         // Validate URL scheme to prevent open redirect attacks (e.g. javascript:, data:, etc.)
         $scheme = parse_url($url, PHP_URL_SCHEME);
-        if (!in_array(strtolower((string)$scheme), ['http', 'https'], true)) {
+        if (!is_string($scheme) || !in_array(strtolower($scheme), ['http', 'https'], true)) {
             $url = 'https://monkeysmail.com';
         }
 
