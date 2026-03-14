@@ -51,7 +51,7 @@ final class MessageController
         private RepositoryFactory $repos,
         private QueryBuilder $qb,
         private OutboundMailService $mailService,
-        string $redisDsn = 'redis://:S3cureRedisPa55!@10.0.0.164:6379/0',
+        string $redisDsn = 'redis://127.0.0.1:6379/0',
     ) {
         $this->messageRepo = $this->repos->getRepository(Message::class);
         $this->messageRecipientRepo = $this->repos->getRepository(MessageRecipient::class);

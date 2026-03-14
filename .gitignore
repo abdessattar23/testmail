@@ -1,0 +1,27 @@
+/vendor/
+.env
+.env.*
+!.env.example
+
+# DKIM private keys — never commit
+var/dkim/*.key
+var/dkim/*.pem
+
+# Runtime
+/storage/logs/*
+/storage/cache/*
+!storage/logs/.gitkeep
+!storage/cache/.gitkeep
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+/build/
